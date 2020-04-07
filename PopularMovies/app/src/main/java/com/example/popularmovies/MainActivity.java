@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         data = new ArrayList<>();
         movieAdapter = new MovieAdapter(data);
-
+        addInitialMovieData();
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(this);

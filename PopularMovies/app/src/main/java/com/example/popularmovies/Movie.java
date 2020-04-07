@@ -2,7 +2,6 @@ package com.example.popularmovies;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
 
 public class Movie {
     @SerializedName("popularity")
