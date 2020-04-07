@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Movie> data;
     private iPopularMovies service;
+    private Retrofit retrofit;
 
 
     private Callback<Page> callBack;
@@ -36,7 +39,13 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(movieAdapter);
-        service = RetrofitClientInstance.getRetrofitInstance().create(iPopularMovies.class);
+        String API_BASE_URL = "https://api.themoviedb.org/3/movie/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        service = retrofit.create(iPopularMovies.class);
 
         callBack = new Callback<Page>() {
 
