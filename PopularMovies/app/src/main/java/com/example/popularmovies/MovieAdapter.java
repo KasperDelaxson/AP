@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>  {
     private ArrayList<Movie> movies;
+
     public MovieAdapter(ArrayList<Movie> movies){
         this.movies = movies;
 

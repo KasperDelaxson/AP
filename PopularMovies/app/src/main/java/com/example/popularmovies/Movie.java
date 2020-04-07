@@ -1,31 +1,47 @@
 package com.example.popularmovies;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Movie {
-    private int popularity;
-    private int voteCount;
+    @SerializedName("popularity")
+    private Integer popularity;
+    @SerializedName("vote_count")
+    private Integer voteCount;
+    @SerializedName("video")
     private boolean video;
+    @SerializedName("poster_path")
     private String posterPath;
-    private long id;
+    @SerializedName("id")
+    private Integer id;
+    @SerializedName("adult")
     private boolean adult;
+    @SerializedName("backdrop_path")
     private String backdropPath;
+    @SerializedName("original_language")
     private String originalLanguage;
+    @SerializedName("original_title")
     private String originalTitle;
-    private int[] genreIDs;
+    @SerializedName("genre_ids")
+    private Integer[] genreIDs;
+    @SerializedName("title")
     private String title;
+    @SerializedName("vote_average")
     private float voteAvg;
+    @SerializedName("overview")
     private String overview;
-    private Date releaseDate;
+    @SerializedName("release_date")
+    private String releaseDate;
 
-    public Movie(int popularity, int voteCount, boolean video, String posterPath,
-                 long id, boolean adult, String backdropPath, String originalLanguage,
-                 String originalTitle, int[] genreIDs, String title, float voteAvg,
-                 String overview, Date releaseDate) {
+    public Movie(Integer popularity, Integer voteCount, boolean video, String posterPath,
+                 Integer id, boolean adult, String backdropPath, String originalLanguage,
+                 String originalTitle, Integer[] genreIDs, String title, float voteAvg,
+                 String overview, String releaseDate) {
         this.popularity = popularity;
         this.voteCount = voteCount;
         this.video = video;
-        this.posterPath = posterPath;
+        this.posterPath = "http://image.tmdb.org/t/p/w185/"+posterPath;
         this.id = id;
         this.adult = adult;
         this.backdropPath = backdropPath;
@@ -38,19 +54,19 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public int getPopularity() {
+    public Integer getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(int popularity) {
+    public void setPopularity(Integer popularity) {
         this.popularity = popularity;
     }
 
-    public int getVoteCount() {
+    public Integer getVoteCount() {
         return voteCount;
     }
 
-    public void setVoteCount(int voteCount) {
+    public void setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
     }
 
@@ -70,11 +86,11 @@ public class Movie {
         this.posterPath = posterPath;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -110,11 +126,11 @@ public class Movie {
         this.originalTitle = originalTitle;
     }
 
-    public int[] getGenreIDs() {
+    public Integer[] getGenreIDs() {
         return genreIDs;
     }
 
-    public void setGenreIDs(int[] genreIDs) {
+    public void setGenreIDs(Integer[] genreIDs) {
         this.genreIDs = genreIDs;
     }
 
@@ -142,11 +158,11 @@ public class Movie {
         this.overview = overview;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 }
