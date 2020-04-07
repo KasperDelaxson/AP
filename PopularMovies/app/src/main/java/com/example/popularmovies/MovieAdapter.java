@@ -2,14 +2,17 @@ package com.example.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -38,6 +41,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         String rating = Float.toString(movies.get(position).getVoteAvg());
         holder.avgRating.setText(rating);
 
+        Glide.with(holder.itemView).load(movies.get(position).getPosterPath()).into(holder.image);
     }
 
     @Override
@@ -47,14 +51,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public class MovieViewHolder extends RecyclerView.ViewHolder{
         public TextView title, releaseDate, avgRating;
+        public ImageView image;
 
         public MovieViewHolder(@NonNull View itemview){
             super(itemview);
-            /*
             title = itemview.findViewById(R.id.title);
             releaseDate = itemview.findViewById(R.id.releaseDate);
             avgRating = itemview.findViewById(R.id.avgRating);
-            */
+            image = itemview.findViewById(R.id.poster);
 
         }
 
