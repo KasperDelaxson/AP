@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,14 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        movieAdapter = new MovieAdapter(data);
-        addInitialMovieData();
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(false);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(movieAdapter);
+        data = new ArrayList<>();
         String API_BASE_URL = "https://api.themoviedb.org/3/movie/";
 
         retrofit = new Retrofit.Builder()
@@ -52,16 +47,31 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<Page> call, Response<Page> response) {
-                data = response.body().getMovies();
+                    Page page = response.body();
+                    Log.d("title",page.getMovies().get(0).getTitle());
+                    data.addAll(page.getMovies());
+
             }
 
             @Override
             public void onFailure(Call<Page> call, Throwable t) {
+                t.printStackTrace();
 
             }
 
 
-            };
+        };
+        addInitialMovieData();
+        movieAdapter = new MovieAdapter(data);
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(false);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(movieAdapter);
+
+
+
+
     }
 
     public void addInitialMovieData(){
