@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Page> call, Response<Page> response) {
                     Page page = response.body();
                     data.addAll(page.getMovies());
+                    Log.d("Poster", "onResponse: "+ data.get(0).getPosterPath());
                     initiateRecyclerView();
 
 

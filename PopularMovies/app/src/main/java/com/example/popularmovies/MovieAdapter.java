@@ -20,9 +20,11 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>  {
     private List<Movie> movies;
+    private String basePictureURL;
     public MovieAdapter(List<Movie> movies){
         this.movies = movies;
         Log.d("movies", "MovieAdapter: "+ movies.size());
+        this.basePictureURL = "http://image.tmdb.org/t/p/w185/";
     }
 
 
@@ -39,8 +41,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.releaseDate.setText(movies.get(position).getReleaseDate());
         String rating = Double.toString(movies.get(position).getVoteAverage());
         holder.avgRating.setText(rating);
-
-        Glide.with(holder.itemView).load(movies.get(position).getPosterPath()).into(holder.image);
+        String picturePath = basePictureURL + movies.get(position).getPosterPath();
+        Log.d("virk", "onBindViewHolder: "+ picturePath);
+        Glide.with(holder.itemView).load(picturePath).into(holder.image);
     }
 
     @Override
