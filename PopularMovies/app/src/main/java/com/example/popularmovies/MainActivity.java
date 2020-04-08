@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Movie> data;
+    private List<Movie> data;
     private iPopularMovies service;
     private Retrofit retrofit;
 
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        data = new ArrayList<>();
         movieAdapter = new MovieAdapter(data);
         addInitialMovieData();
         recyclerView = findViewById(R.id.recycler_view);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<Page> call, Response<Page> response) {
-                data.addAll(response.body().getResults());
+                data = response.body().getMovies();
             }
 
             @Override

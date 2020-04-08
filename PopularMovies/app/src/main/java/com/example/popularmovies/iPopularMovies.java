@@ -5,6 +5,6 @@ import retrofit2.http.GET;
 
 public interface iPopularMovies {
 
-    @GET("Popular?api_key=862ba28e9076e5bb347d7ebb497bc8a2&Page=1")
+    @GET("popular?api_key=862ba28e9076e5bb347d7ebb497bc8a2&Page=1")
     Call<Page> getFirstPage();
 }

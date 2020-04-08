@@ -1,25 +1,23 @@
 package com.example.popularmovies;
 
+import java.util.List;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 public class Page {
+
     @SerializedName("page")
+    @Expose
     private Integer page;
-    @SerializedName("results")
-    private ArrayList<Movie> results;
     @SerializedName("total_results")
+    @Expose
     private Integer totalResults;
     @SerializedName("total_pages")
+    @Expose
     private Integer totalPages;
-
-    public Page(Integer page, ArrayList<Movie> results, Integer totalResults, Integer totalPages) {
-        this.page = page;
-        this.results = results;
-        this.totalResults = totalResults;
-        this.totalPages = totalPages;
-    }
+    @SerializedName("results")
+    @Expose
+    private List<Movie> movies = null;
 
     public Integer getPage() {
         return page;
@@ -27,14 +25,6 @@ public class Page {
 
     public void setPage(Integer page) {
         this.page = page;
-    }
-
-    public ArrayList<Movie> getResults() {
-        return results;
-    }
-
-    public void setResults(ArrayList<Movie> results) {
-        this.results = results;
     }
 
     public Integer getTotalResults() {
@@ -52,4 +42,14 @@ public class Page {
     public void setTotalPages(Integer totalPages) {
         this.totalPages = totalPages;
     }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
 }
+

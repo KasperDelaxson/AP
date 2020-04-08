@@ -15,11 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>  {
-    private ArrayList<Movie> movies;
+    private List<Movie> movies;
     private Context con;
-    public MovieAdapter(ArrayList<Movie> movies){
+    public MovieAdapter(List<Movie> movies){
         this.movies = movies;
     }
 
@@ -35,7 +36,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         holder.title.setText(movies.get(position).getOriginalTitle());
         holder.releaseDate.setText(movies.get(position).getReleaseDate());
-        String rating = Float.toString(movies.get(position).getVoteAvg());
+        String rating = Double.toString(movies.get(position).getVoteAverage());
         holder.avgRating.setText(rating);
 
         Glide.with(holder.itemView).load(movies.get(position).getPosterPath()).into(holder.image);

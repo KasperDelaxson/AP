@@ -1,63 +1,58 @@
 package com.example.popularmovies;
-
+import java.util.List;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
 public class Movie {
+
     @SerializedName("popularity")
-    private Integer popularity;
+    @Expose
+    private Double popularity;
     @SerializedName("vote_count")
+    @Expose
     private Integer voteCount;
     @SerializedName("video")
-    private boolean video;
+    @Expose
+    private Boolean video;
     @SerializedName("poster_path")
+    @Expose
     private String posterPath;
     @SerializedName("id")
+    @Expose
     private Integer id;
     @SerializedName("adult")
-    private boolean adult;
+    @Expose
+    private Boolean adult;
     @SerializedName("backdrop_path")
+    @Expose
     private String backdropPath;
     @SerializedName("original_language")
+    @Expose
     private String originalLanguage;
     @SerializedName("original_title")
+    @Expose
     private String originalTitle;
     @SerializedName("genre_ids")
-    private Integer[] genreIDs;
+    @Expose
+    private List<Integer> genreIds = null;
     @SerializedName("title")
+    @Expose
     private String title;
     @SerializedName("vote_average")
-    private float voteAvg;
+    @Expose
+    private Double voteAverage;
     @SerializedName("overview")
+    @Expose
     private String overview;
     @SerializedName("release_date")
+    @Expose
     private String releaseDate;
 
-    public Movie(Integer popularity, Integer voteCount, boolean video, String posterPath,
-                 Integer id, boolean adult, String backdropPath, String originalLanguage,
-                 String originalTitle, Integer[] genreIDs, String title, float voteAvg,
-                 String overview, String releaseDate) {
-        this.popularity = popularity;
-        this.voteCount = voteCount;
-        this.video = video;
-        this.posterPath = "http://image.tmdb.org/t/p/w185/"+posterPath;
-        this.id = id;
-        this.adult = adult;
-        this.backdropPath = backdropPath;
-        this.originalLanguage = originalLanguage;
-        this.originalTitle = originalTitle;
-        this.genreIDs = genreIDs;
-        this.title = title;
-        this.voteAvg = voteAvg;
-        this.overview = overview;
-        this.releaseDate = releaseDate;
-    }
-
-    public Integer getPopularity() {
+    public Double getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(Integer popularity) {
+    public void setPopularity(Double popularity) {
         this.popularity = popularity;
     }
 
@@ -69,11 +64,11 @@ public class Movie {
         this.voteCount = voteCount;
     }
 
-    public boolean isVideo() {
+    public Boolean getVideo() {
         return video;
     }
 
-    public void setVideo(boolean video) {
+    public void setVideo(Boolean video) {
         this.video = video;
     }
 
@@ -93,11 +88,11 @@ public class Movie {
         this.id = id;
     }
 
-    public boolean isAdult() {
+    public Boolean getAdult() {
         return adult;
     }
 
-    public void setAdult(boolean adult) {
+    public void setAdult(Boolean adult) {
         this.adult = adult;
     }
 
@@ -125,12 +120,12 @@ public class Movie {
         this.originalTitle = originalTitle;
     }
 
-    public Integer[] getGenreIDs() {
-        return genreIDs;
+    public List<Integer> getGenreIds() {
+        return genreIds;
     }
 
-    public void setGenreIDs(Integer[] genreIDs) {
-        this.genreIDs = genreIDs;
+    public void setGenreIds(List<Integer> genreIds) {
+        this.genreIds = genreIds;
     }
 
     public String getTitle() {
@@ -141,12 +136,12 @@ public class Movie {
         this.title = title;
     }
 
-    public float getVoteAvg() {
-        return voteAvg;
+    public Double getVoteAverage() {
+        return voteAverage;
     }
 
-    public void setVoteAvg(float voteAvg) {
-        this.voteAvg = voteAvg;
+    public void setVoteAverage(Double voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
     public String getOverview() {
@@ -164,4 +159,5 @@ public class Movie {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+
 }
