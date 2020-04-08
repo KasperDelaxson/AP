@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Page> call, Response<Page> response) {
                     Page page = response.body();
-                    Log.d("title",page.getMovies().get(0).getTitle());
                     data.addAll(page.getMovies());
+                    initiateRecyclerView();
+
 
             }
 
@@ -62,16 +63,19 @@ public class MainActivity extends AppCompatActivity {
 
         };
         addInitialMovieData();
+
+
+
+
+    }
+    public void initiateRecyclerView(){
         movieAdapter = new MovieAdapter(data);
+        Log.d("afterAdapter", "onCreate: virker det?");
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(movieAdapter);
-
-
-
-
     }
 
     public void addInitialMovieData(){

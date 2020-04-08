@@ -3,6 +3,7 @@ package com.example.popularmovies;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,9 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>  {
     private List<Movie> movies;
-    private Context con;
     public MovieAdapter(List<Movie> movies){
         this.movies = movies;
+        Log.d("movies", "MovieAdapter: "+ movies.size());
     }
 
 
@@ -34,7 +35,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        holder.title.setText(movies.get(position).getOriginalTitle());
+        holder.title.setText(movies.get(position).getTitle());
         holder.releaseDate.setText(movies.get(position).getReleaseDate());
         String rating = Double.toString(movies.get(position).getVoteAverage());
         holder.avgRating.setText(rating);
