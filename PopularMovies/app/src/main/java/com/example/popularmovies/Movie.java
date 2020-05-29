@@ -1,9 +1,10 @@
 package com.example.popularmovies;
+import java.util.Comparator;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Movie {
+public class Movie implements Comparator<Movie> {
 
     @SerializedName("popularity")
     @Expose
@@ -158,6 +159,11 @@ public class Movie {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    @Override
+    public int compare(Movie o1, Movie o2) {
+        return Double.compare(o1.popularity, o2.popularity);
     }
 
 }
