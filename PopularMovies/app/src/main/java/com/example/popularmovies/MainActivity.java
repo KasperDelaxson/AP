@@ -48,7 +48,12 @@ public class MainActivity extends AppCompatActivity{
                     Page page = response.body();
                     data.addAll(page.getMovies());
                     Log.d("Poster", "onResponse: "+ data.get(0).getPosterPath());
-                    initiateRecyclerView();
+                    if(movieAdapter==null) {
+                        initiateRecyclerView();
+                    }else{
+                        data.addAll(page.getMovies());
+                        movieAdapter.notifyDataSetChanged();
+                    }
 
 
             }
@@ -92,7 +97,8 @@ public class MainActivity extends AppCompatActivity{
                 int maxPages = 500;
                 for(int page=2; page<maxPages; page++){
                     Call<Page> aPage = service.getAPage(API_PAGE_URL+page);
-                    movieAdapter.notifyDataSetChanged();
+                    aPage.enqueue(callBack);
+
                 }
             }
         });
