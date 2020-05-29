@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity{
     private iPopularMovies service;
     private Retrofit retrofit;
     private Runnable updateUI;
+    private MovieComparator comparator;
 
     private Callback<Page> callBack;
     @Override
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity{
                 movieAdapter.notifyDataSetChanged();
             }
         };
+        comparator = new MovieComparator();
 
 
 
@@ -56,11 +59,13 @@ public class MainActivity extends AppCompatActivity{
             public void onResponse(Call<Page> call, Response<Page> response) {
                     Page page = response.body();
                     data.addAll(page.getMovies());
+                    Collections.sort(data, comparator);
                     Log.d("Poster", "onResponse: "+ data.get(0).getPosterPath());
                     if(movieAdapter==null) {
                         initiateRecyclerView();
                     }else{
                         runOnUiThread(updateUI);
+
                     }
 
 
