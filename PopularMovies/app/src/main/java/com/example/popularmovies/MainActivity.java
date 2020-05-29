@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity{
                     if(movieAdapter==null) {
                         initiateRecyclerView();
                     }else{
-                        data.addAll(page.getMovies());
-
                         updateData();
                     }
 
