@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity{
     private static final String API_PAGE_URL = "popular?api_key=862ba28e9076e5bb347d7ebb497bc8a2&page=";
     private RecyclerView recyclerView;
-    private MovieAdapter movieAdapter;
+    private static MovieAdapter movieAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Movie> data;
     private iPopularMovies service;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
                         initiateRecyclerView();
                     }else{
                         data.addAll(page.getMovies());
-                        movieAdapter.notifyDataSetChanged();
+                        MainActivity.updateData();
                     }
 
 
@@ -102,5 +102,9 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
+    }
+
+    public static void updateData(){
+        movieAdapter.notifyDataSetChanged();
     }
 }
