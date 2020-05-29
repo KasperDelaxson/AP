@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
                     if(movieAdapter==null) {
                         initiateRecyclerView();
                     }else{
-                        updateData();
+                        runOnUiThread(updateUI);
                     }
 
 
@@ -112,7 +112,4 @@ public class MainActivity extends AppCompatActivity{
         }).start();
     }
 
-    public void updateData(){
-        runOnUiThread(updateUI);
-    }
 }
