@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.gson.JsonObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String API_PAGE_URL = "popular?api_key=862ba28e9076e5bb347d7ebb497bc8a2&page=";
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addInitialMovieData(){
-        Call<Page> aPage = service.getFirstPage();
+        Call<Page> aPage = service.getAPage(API_PAGE_URL+1);
         aPage.enqueue(callBack);
 
     }
