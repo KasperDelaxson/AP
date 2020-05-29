@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity{
 
                 }
             }
-        });
+        }).start();
     }
 
     public static void updateData(){
