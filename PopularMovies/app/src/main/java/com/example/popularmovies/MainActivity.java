@@ -60,9 +60,8 @@ public class MainActivity extends AppCompatActivity{
                     if(movieAdapter==null) {
                         initiateRecyclerView();
                     }else{
-                        data.addAll(page.getMovies());
-
                         updateData();
+
                     }
 
 
@@ -108,8 +107,8 @@ public class MainActivity extends AppCompatActivity{
                 for(int page=2; page<maxPages; page++){
                     Call<Page> aPage = service.getAPage(API_PAGE_URL+page);
                     aPage.enqueue(callBack);
-
                 }
+
             }
         }).start();
     }
