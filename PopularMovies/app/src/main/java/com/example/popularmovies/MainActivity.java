@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,7 +17,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private static final String API_PAGE_URL = "popular?api_key=862ba28e9076e5bb347d7ebb497bc8a2&page=";
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Movie> data;
     private iPopularMovies service;
     private Retrofit retrofit;
-
+    private Runnable updateUI;
+    private MovieComparator comparator;
 
     private Callback<Page> callBack;
     @Override
@@ -40,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         service = retrofit.create(iPopularMovies.class);
 
+        updateUI = new Runnable() {
+            @Override
+            public void run() {
+                movieAdapter.notifyDataSetChanged();
+            }
+        };
+        comparator = new MovieComparator();
+
+
+
         callBack = new Callback<Page>() {
 
 
@@ -47,8 +59,16 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Page> call, Response<Page> response) {
                     Page page = response.body();
                     data.addAll(page.getMovies());
+                    Collections.sort(data, comparator);
                     Log.d("Poster", "onResponse: "+ data.get(0).getPosterPath());
-                    initiateRecyclerView();
+                    if(movieAdapter==null) {
+                        initiateRecyclerView();
+                    }else{
+                        runOnUiThread(updateUI);
+
+                    }
+
+
             }
 
             @Override
@@ -58,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         };
         addInitialMovieData();
+        addAllMovieData();
 
     }
     public void initiateRecyclerView(){
@@ -78,6 +99,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void addAllMovieData(){
         //thread that gets rest of data?
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int maxPages = 500;
+                for(int page=2; page<maxPages; page++){
+                    Call<Page> aPage = service.getAPage(API_PAGE_URL+page);
+                    aPage.enqueue(callBack);
+
+                }
+            }
+        }).start();
     }
 
 }
