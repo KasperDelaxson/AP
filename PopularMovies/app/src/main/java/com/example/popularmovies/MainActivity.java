@@ -49,22 +49,15 @@ public class MainActivity extends AppCompatActivity {
                     data.addAll(page.getMovies());
                     Log.d("Poster", "onResponse: "+ data.get(0).getPosterPath());
                     initiateRecyclerView();
-
-
             }
 
             @Override
             public void onFailure(Call<Page> call, Throwable t) {
                 t.printStackTrace();
-
             }
-
 
         };
         addInitialMovieData();
-
-
-
 
     }
     public void initiateRecyclerView(){
@@ -86,4 +79,5 @@ public class MainActivity extends AppCompatActivity {
     public void addAllMovieData(){
         //thread that gets rest of data?
     }
+
 }
