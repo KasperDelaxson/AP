@@ -31,7 +31,7 @@ public class MovieDetailsActivity extends AppCompatActivity{
         releaseDateView.setText(releaseDate);
         //avg rating
         String avgRating = intent.getStringExtra("avgRating");
-        TextView avgRatingView = findViewById(R.id.avgRating);
+        TextView avgRatingView = findViewById(R.id.rating);
         avgRatingView.setText(avgRating);
         // title
         String title = intent.getStringExtra("title");
