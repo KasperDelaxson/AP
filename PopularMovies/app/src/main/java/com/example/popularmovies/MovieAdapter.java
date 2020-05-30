@@ -45,7 +45,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         String rating = Double.toString(movies.get(position).getVoteAverage());
         holder.avgRating.setText(rating);
         String picturePath = basePictureURL + movies.get(position).getPosterPath();
-        movies.get(position).setPosterPath(picturePath);
         Log.d("virk", "onBindViewHolder: "+ picturePath);
         Glide.with(holder.itemView).load(picturePath).into(holder.image);
     }
