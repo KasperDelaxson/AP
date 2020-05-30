@@ -72,26 +72,33 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
                 t.printStackTrace();
             }
         };
-        addInitialMovieData();
         addAllMovieData();
 
     }
     public void initiateRecyclerView(){
-        movieAdapter = new MovieAdapter(data);
-        movieAdapter.setItemClickListener(MainActivity.this);
-        Log.d("afterAdapter", "onCreate: virker det?");
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(false);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(movieAdapter);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                movieAdapter = new MovieAdapter(data);
+                movieAdapter.setItemClickListener(MainActivity.this);
+                Log.d("afterAdapter", "onCreate: virker det?");
+                recyclerView = findViewById(R.id.recycler_view);
+                recyclerView.setHasFixedSize(false);
+                layoutManager = new LinearLayoutManager(this);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(movieAdapter);
+            }
+        });
+
     }
 
+    /*
     public void addInitialMovieData(){
         Call<Page> aPage = service.getAPage(API_PAGE_URL+1);
         aPage.enqueue(callBack);
 
     }
+    */
 
     public void addAllMovieData(){
         //thread that gets rest of data?
@@ -99,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
             @Override
             public void run() {
                 int maxPages = 500;
-                for(int page=2; page<maxPages; page++){
+                for(int page=1; page<maxPages; page++){
                     Call<Page> aPage = service.getAPage(API_PAGE_URL+page);
                     aPage.enqueue(callBack);
 
