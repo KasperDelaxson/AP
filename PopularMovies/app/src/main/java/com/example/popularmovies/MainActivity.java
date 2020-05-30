@@ -113,6 +113,9 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
         Intent intent = new Intent(this, MovieDetails.class);
         Movie movie = data.get(position);
         intent.putExtra("poster", movie.getPosterPath());
+        intent.putExtra("releaseDate", movie.getReleaseDate());
+        intent.putExtra("avgRating", movie.getVoteAverage());
+        intent.putExtra("title", movie.getTitle());
         startActivity(intent);
     }
 }
