@@ -83,11 +83,13 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
         recyclerView.setAdapter(movieAdapter);
     }
 
+    /*
     public void addInitialMovieData(){
         Call<Page> aPage = service.getAPage(API_PAGE_URL+1);
         aPage.enqueue(callBack);
 
     }
+    */
 
     public void addAllMovieData(){
         //thread that gets rest of data?
