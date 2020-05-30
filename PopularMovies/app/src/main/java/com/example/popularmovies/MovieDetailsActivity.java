@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
-public class MovieDetails extends AppCompatActivity{
+public class MovieDetailsActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +31,16 @@ public class MovieDetails extends AppCompatActivity{
         releaseDateView.setText(releaseDate);
         //avg rating
         String avgRating = intent.getStringExtra("avgRating");
-        TextView avgRatingView = findViewById(R.id.avgRating);
+        TextView avgRatingView = findViewById(R.id.rating);
         avgRatingView.setText(avgRating);
         // title
         String title = intent.getStringExtra("title");
         TextView titleView = findViewById(R.id.title);
         titleView.setText(title);
+        //overview
+        String overview = intent.getStringExtra("descriptionTextView");
+        TextView overviewView = findViewById(R.id.descriptionTextView);
+        overviewView.setText(overview);
 
         // skal hente billeder via Glide/picasso
 

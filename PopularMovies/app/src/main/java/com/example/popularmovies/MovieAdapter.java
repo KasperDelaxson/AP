@@ -1,13 +1,9 @@
 package com.example.popularmovies;
 
-import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>  {
@@ -64,7 +59,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             super(itemview);
             title = itemview.findViewById(R.id.title);
             releaseDate = itemview.findViewById(R.id.releaseDate);
-            avgRating = itemview.findViewById(R.id.avgRating);
+            avgRating = itemview.findViewById(R.id.rating);
             image = itemview.findViewById(R.id.poster);
             itemview.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -18,6 +18,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivity extends AppCompatActivity implements MovieClickListener{
     private static final String API_PAGE_URL = "popular?api_key=862ba28e9076e5bb347d7ebb497bc8a2&page=";
     private RecyclerView recyclerView;
@@ -97,10 +99,14 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
             @Override
             public void run() {
                 int maxPages = 500;
-                for(int page=1; page<maxPages; page++){
-                    Call<Page> aPage = service.getAPage(API_PAGE_URL+page);
-                    aPage.enqueue(callBack);
-
+                try {
+                    for (int page = 1; page < maxPages; page++) {
+                        Call<Page> aPage = service.getAPage(API_PAGE_URL + page);
+                        aPage.enqueue(callBack);
+                        Thread.sleep(1000);
+                    }
+                } catch (InterruptedException ex){
+                    ex.printStackTrace();
                 }
             }
         }).start();
@@ -108,12 +114,13 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
 
     @Override
     public void showMovieDetails(int position, String baseURL) {
-        Intent intent = new Intent(this, MovieDetails.class);
+        Intent intent = new Intent(this, MovieDetailsActivity.class);
         Movie movie = data.get(position);
         intent.putExtra("poster", baseURL + movie.getPosterPath());
         intent.putExtra("releaseDate", movie.getReleaseDate());
         intent.putExtra("avgRating", movie.getVoteAverage());
         intent.putExtra("title", movie.getTitle());
+        intent.putExtra("descriptionTextView", movie.getOverview());
         startActivity(intent);
     }
 }
