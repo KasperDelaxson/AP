@@ -24,15 +24,19 @@ public class MovieDetails extends AppCompatActivity{
         //poster
         String imagePoster = intent.getStringExtra("poster");
         ImageView posterView = findViewById(R.id.poster);
+        Glide.with(this).load(imagePoster).into(posterView);
         //release date
         String releaseDate = intent.getStringExtra("releaseDate");
         TextView releaseDateView = findViewById(R.id.releaseDate);
+        releaseDateView.setText(releaseDate);
         //avg rating
         String avgRating = intent.getStringExtra("avgRating");
         TextView avgRatingView = findViewById(R.id.avgRating);
+        avgRatingView.setText(avgRating);
         // title
         String title = intent.getStringExtra("title");
         TextView titleView = findViewById(R.id.title);
+        titleView.setText(title);
 
         // skal hente billeder via Glide/picasso
 
