@@ -35,7 +35,6 @@ public class MovieDetails extends AppCompatActivity{
         TextView titleView = findViewById(R.id.title);
 
         // skal hente billeder via Glide/picasso
-        Glide.with(view);
 
     }
 
