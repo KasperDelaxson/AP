@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -24,7 +25,8 @@ public class MovieDetailsActivity extends AppCompatActivity{
         //poster
         String imagePoster = intent.getStringExtra("poster");
         ImageView posterView = findViewById(R.id.poster);
-        Glide.with(this).load(imagePoster).into(posterView);
+        //Glide.with(this).load(imagePoster).into(posterView);
+        Picasso.get().load(imagePoster).into(posterView);
         //release date
         String releaseDate = intent.getStringExtra("releaseDate");
         TextView releaseDateView = findViewById(R.id.releaseDate);
