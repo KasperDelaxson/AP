@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.avgRating.setText(rating);
         String picturePath = basePictureURL + movies.get(position).getPosterPath();
         Log.d("virk", "onBindViewHolder: "+ picturePath);
-        Glide.with(holder.itemView).load(picturePath).into(holder.image);
+        //Glide.with(holder.itemView).load(picturePath).into(holder.image);
+        Picasso.get().load(picturePath).into(holder.image);
     }
 
     @Override
