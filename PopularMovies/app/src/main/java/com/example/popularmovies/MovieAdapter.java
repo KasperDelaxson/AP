@@ -70,7 +70,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                     if(listener!=null){
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
-                            listener.showMovieDetails(position);
+                            listener.showMovieDetails(position, basePictureURL);
                         }
                     }
                 }
@@ -88,7 +88,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             v.setOnClickListener(this);
         }
         public void onClick(View view){
-            listener.showMovieDetails(getAdapterPosition());
+            listener.showMovieDetails(getAdapterPosition(), basePictureURL);
         }
     }
 

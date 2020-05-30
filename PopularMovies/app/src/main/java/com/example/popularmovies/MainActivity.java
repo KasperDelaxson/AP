@@ -109,10 +109,10 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
     }
 
     @Override
-    public void showMovieDetails(int position) {
+    public void showMovieDetails(int position, String baseURL) {
         Intent intent = new Intent(this, MovieDetails.class);
         Movie movie = data.get(position);
-        intent.putExtra("poster", movie.getPosterPath());
+        intent.putExtra("poster", baseURL + movie.getPosterPath());
         intent.putExtra("releaseDate", movie.getReleaseDate());
         intent.putExtra("avgRating", movie.getVoteAverage());
         intent.putExtra("title", movie.getTitle());
