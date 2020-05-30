@@ -61,18 +61,14 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
                     data.addAll(page.getMovies());
                     Collections.sort(data, comparator);
                     Log.d("Poster", "onResponse: "+ data.get(0).getPosterPath());
-                    if(movieAdapter==null) {
-                        initiateRecyclerView();
-                    }else{
-                        runOnUiThread(updateUI);
-                    }
+                    runOnUiThread(updateUI);
             }
             @Override
             public void onFailure(Call<Page> call, Throwable t) {
                 t.printStackTrace();
             }
         };
-        addInitialMovieData();
+        initiateRecyclerView();
         addAllMovieData();
 
     }
@@ -87,11 +83,13 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
         recyclerView.setAdapter(movieAdapter);
     }
 
+    /*
     public void addInitialMovieData(){
         Call<Page> aPage = service.getAPage(API_PAGE_URL+1);
         aPage.enqueue(callBack);
 
     }
+    */
 
     public void addAllMovieData(){
         //thread that gets rest of data?
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
             @Override
             public void run() {
                 int maxPages = 500;
-                for(int page=2; page<maxPages; page++){
+                for(int page=1; page<maxPages; page++){
                     Call<Page> aPage = service.getAPage(API_PAGE_URL+page);
                     aPage.enqueue(callBack);
 
