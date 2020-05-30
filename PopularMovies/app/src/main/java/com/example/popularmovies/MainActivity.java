@@ -61,44 +61,33 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
                     data.addAll(page.getMovies());
                     Collections.sort(data, comparator);
                     Log.d("Poster", "onResponse: "+ data.get(0).getPosterPath());
-                    if(movieAdapter==null) {
-                        initiateRecyclerView();
-                    }else{
-                        runOnUiThread(updateUI);
-                    }
+                    runOnUiThread(updateUI);
             }
             @Override
             public void onFailure(Call<Page> call, Throwable t) {
                 t.printStackTrace();
             }
         };
+        initiateRecyclerView();
         addAllMovieData();
 
     }
     public void initiateRecyclerView(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                movieAdapter = new MovieAdapter(data);
-                movieAdapter.setItemClickListener(MainActivity.this);
-                Log.d("afterAdapter", "onCreate: virker det?");
-                recyclerView = findViewById(R.id.recycler_view);
-                recyclerView.setHasFixedSize(false);
-                layoutManager = new LinearLayoutManager(this);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(movieAdapter);
-            }
-        });
-
+        movieAdapter = new MovieAdapter(data);
+        movieAdapter.setItemClickListener(MainActivity.this);
+        Log.d("afterAdapter", "onCreate: virker det?");
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(false);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(movieAdapter);
     }
 
-    /*
     public void addInitialMovieData(){
         Call<Page> aPage = service.getAPage(API_PAGE_URL+1);
         aPage.enqueue(callBack);
 
     }
-    */
 
     public void addAllMovieData(){
         //thread that gets rest of data?
