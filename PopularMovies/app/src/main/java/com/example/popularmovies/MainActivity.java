@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,7 +18,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements MovieClickListener{
     private static final String API_PAGE_URL = "popular?api_key=862ba28e9076e5bb347d7ebb497bc8a2&page=";
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity{
     private Retrofit retrofit;
     private Runnable updateUI;
     private MovieComparator comparator;
+
 
     private Callback<Page> callBack;
     @Override
@@ -50,8 +52,6 @@ public class MainActivity extends AppCompatActivity{
         };
         comparator = new MovieComparator();
 
-
-
         callBack = new Callback<Page>() {
 
 
@@ -65,17 +65,12 @@ public class MainActivity extends AppCompatActivity{
                         initiateRecyclerView();
                     }else{
                         runOnUiThread(updateUI);
-
                     }
-
-
             }
-
             @Override
             public void onFailure(Call<Page> call, Throwable t) {
                 t.printStackTrace();
             }
-
         };
         addInitialMovieData();
         addAllMovieData();
@@ -83,6 +78,7 @@ public class MainActivity extends AppCompatActivity{
     }
     public void initiateRecyclerView(){
         movieAdapter = new MovieAdapter(data);
+        movieAdapter.setItemClickListener(MainActivity.this);
         Log.d("afterAdapter", "onCreate: virker det?");
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
@@ -112,4 +108,11 @@ public class MainActivity extends AppCompatActivity{
         }).start();
     }
 
+    @Override
+    public void showMovieDetails(int position) {
+        Intent intent = new Intent(this, MovieDetails.class);
+        Movie movie = data.get(position);
+        intent.putExtra("poster", movie.getPosterPath());
+        startActivity(intent);
+    }
 }

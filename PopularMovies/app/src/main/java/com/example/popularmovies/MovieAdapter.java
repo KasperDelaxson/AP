@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>  {
     private List<Movie> movies;
     private String basePictureURL;
+    private MovieClickListener listener;
+
     public MovieAdapter(List<Movie> movies){
         this.movies = movies;
         Log.d("movies", "MovieAdapter: "+ movies.size());
@@ -61,11 +64,35 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             releaseDate = itemview.findViewById(R.id.releaseDate);
             avgRating = itemview.findViewById(R.id.avgRating);
             image = itemview.findViewById(R.id.poster);
-
+            itemview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener!=null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.showMovieDetails(position);
+                        }
+                    }
+                }
+            });
         }
-
-
     }
 
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public TextView tView;
 
+        public MyViewHolder(View v){
+            super(v);
+            TextView text = v.findViewById(R.id.recycler_view);
+            tView = text;
+            v.setOnClickListener(this);
+        }
+        public void onClick(View view){
+            listener.showMovieDetails(getAdapterPosition());
+        }
+    }
+
+    public void setItemClickListener(MovieClickListener listener){
+        this.listener = listener;
+    }
 }
