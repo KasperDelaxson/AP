@@ -14,6 +14,9 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MovieDetailsActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +28,11 @@ public class MovieDetailsActivity extends AppCompatActivity{
         //poster
         String imagePoster = intent.getStringExtra("poster");
         ImageView posterView = findViewById(R.id.poster);
-        //Glide.with(this).load(imagePoster).into(posterView);
         Picasso.get().load(imagePoster).into(posterView);
         //release date
         String releaseDate = intent.getStringExtra("releaseDate");
         TextView releaseDateView = findViewById(R.id.releaseDate);
-        releaseDateView.setText(releaseDate);
-        //avg rating
-        String avgRating = intent.getStringExtra("avgRating");
-        TextView avgRatingView = findViewById(R.id.rating);
-        avgRatingView.setText(avgRating);
+        releaseDateView.setText("Release Date: " + releaseDate);
         // title
         String title = intent.getStringExtra("title");
         TextView titleView = findViewById(R.id.title);
@@ -42,10 +40,11 @@ public class MovieDetailsActivity extends AppCompatActivity{
         //overview
         String overview = intent.getStringExtra("descriptionTextView");
         TextView overviewView = findViewById(R.id.descriptionTextView);
-        overviewView.setText(overview);
-
-        // skal hente billeder via Glide/picasso
-
+        overviewView.setText("Overview: " +overview);
+        //language
+        String language = intent.getStringExtra("languageView");
+        TextView languageTextView = findViewById(R.id.languageView);
+        languageTextView.setText("Original Language: " + language);
     }
 
 

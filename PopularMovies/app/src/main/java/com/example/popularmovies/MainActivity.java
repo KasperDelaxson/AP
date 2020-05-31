@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -85,14 +86,6 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
         recyclerView.setAdapter(movieAdapter);
     }
 
-    /*
-    public void addInitialMovieData(){
-        Call<Page> aPage = service.getAPage(API_PAGE_URL+1);
-        aPage.enqueue(callBack);
-
-    }
-    */
-
     public void addAllMovieData(){
         //thread that gets rest of data?
         new Thread(new Runnable() {
@@ -118,9 +111,10 @@ public class MainActivity extends AppCompatActivity implements MovieClickListene
         Movie movie = data.get(position);
         intent.putExtra("poster", baseURL + movie.getPosterPath());
         intent.putExtra("releaseDate", movie.getReleaseDate());
-        intent.putExtra("avgRating", movie.getVoteAverage());
         intent.putExtra("title", movie.getTitle());
         intent.putExtra("descriptionTextView", movie.getOverview());
+        intent.putExtra("languageView", movie.getOriginalLanguage());
+
         startActivity(intent);
     }
 }
